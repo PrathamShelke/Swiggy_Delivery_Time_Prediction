@@ -1,0 +1,5 @@
+
+Steps
+1)Performed Basic Data Exploration and Cleaned the Data
+2)Using Data Cleaning Code in the notebook 01 created data_clean_utils.py file and created swiggy_cleaned.csv
+3)Performed EDA in 02 notebook to understand data properly by performing univariate,bivariate and multivariate analysis.
