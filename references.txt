@@ -2,7 +2,7 @@
 1)To download any github sub directory: https://download-directory.github.io/
 2)Main Project Github link: https://github.com/Himanshu-1703/swiggy-delivery-time-prediction
 
-Steps to connect local folder with github
+3)Steps to connect local folder with github
 i)git init
 ii)git add .
 iii)git commit -m "Message"
