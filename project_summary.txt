@@ -1,8 +1,0 @@
-
-Steps
-1)Performed Basic Data Exploration and Cleaned the Data
-2)Using Data Cleaning Code in the notebook 01 created data_clean_utils.py file and created swiggy_cleaned.csv
-3)Performed EDA in 02 notebook to understand data properly by performing univariate,bivariate and multivariate analysis.
-
-4)Building Baseline Model(Linear Regression) using 2 ways without Missing Val(NAN) and Imputation of missing vals
-Evaluating both the Baseline model with metrics like MAE,R2 Score.
