@@ -37,3 +37,11 @@ iv)Pluggable storage for tracking server and artifacts
 7)Creating a Virtual environment in Python and activate it.
 i)python -m venv venv
 ii)source venv/bin/activate
+
+8)Steps to setup Data Version Control through dvc
+i)dvc init
+ii)dvc add /data/raw/example.csv before doing this remove this .csv from git tracking .
+
+Instead we need to stop dvc tracking use: dvc remove swiggy_dataset/eg.csv.dvc
+
+
