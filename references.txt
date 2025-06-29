@@ -46,4 +46,10 @@ Instead we need to stop dvc tracking use: dvc remove swiggy_dataset/eg.csv.dvc
 
 iii)dvc dag is used to see the stage of dvc and it gets updated as we update dvc.yaml file
 iv)dvc repro is used to run the particular stage we define in dvc.yaml and then we can check using dvc dag.
+v)THan we can push this stage into github 
 
+Similarly repeat this step iii),iv),v) as we keep on adding stage in the dvc.yaml file and .py files in src folder
+
+9)cmd + / is used to add comments or remove comment from multiple lines in code.
+
+10)The params.yaml file in DVC (Data Version Control) is used to store hyperparameters or configuration values for your machine learning (or data science) pipeline in a clean, versioned, and reusable way.

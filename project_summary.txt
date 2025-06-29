@@ -33,6 +33,11 @@ Performed Data versioning as well through dvc.
 7)Created data_cleaning.py file in src/data folder which is basically data_clean_utils file code but tracked through dvc
 Defined dvc.yaml and params.yaml file.
 In dvc .yaml file added the required code for each section.
+
 Than run dvc repro to run this particular stage of dvc.yaml defined 
 Then we can check the current stage using dvc dag.
+Than we can push this stage into github
+
+Similarly repeat this step 7 as we keep on adding stage in the dvc.yaml file and .py files in src folder one by one.
+
 
