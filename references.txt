@@ -53,3 +53,5 @@ Similarly repeat this step iii),iv),v) as we keep on adding stage in the dvc.yam
 9)cmd + / is used to add comments or remove comment from multiple lines in code.
 
 10)The params.yaml file in DVC (Data Version Control) is used to store hyperparameters or configuration values for your machine learning (or data science) pipeline in a clean, versioned, and reusable way.
+
+11)git log --oneline is used to see all the commits in the repro
