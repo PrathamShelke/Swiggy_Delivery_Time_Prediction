@@ -44,4 +44,6 @@ ii)dvc add /data/raw/example.csv before doing this remove this .csv from git tra
 
 Instead we need to stop dvc tracking use: dvc remove swiggy_dataset/eg.csv.dvc
 
+iii)dvc dag is used to see the stage of dvc and it gets updated as we update dvc.yaml file
+iv)dvc repro is used to run the particular stage we define in dvc.yaml and then we can check using dvc dag.
 

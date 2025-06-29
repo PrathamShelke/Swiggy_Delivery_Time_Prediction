@@ -26,5 +26,13 @@ Performed EXP7:We logged the best model params in this experiment.
 
 6)Pushed all the Code on github by doing Code versioning.
 We can do github versioning  at start of project as well.
+Also created Python venv for dowloading all the required packages in requirements-dev.txt.
 
 Performed Data versioning as well through dvc.
+
+7)Created data_cleaning.py file in src/data folder which is basically data_clean_utils file code but tracked through dvc
+Defined dvc.yaml and params.yaml file.
+In dvc .yaml file added the required code for each section.
+Than run dvc repro to run this particular stage of dvc.yaml defined 
+Then we can check the current stage using dvc dag.
+
