@@ -33,3 +33,7 @@ i)Experiment tracking (parameters, metrics, artifacts)
 ii)Model registry
 iii)Local UI server to view runs
 iv)Pluggable storage for tracking server and artifacts
+
+7)Creating a Virtual environment in Python and activate it.
+i)python -m venv venv
+ii)source venv/bin/activate
