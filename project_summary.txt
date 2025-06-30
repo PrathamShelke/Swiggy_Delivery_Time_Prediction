@@ -9,7 +9,7 @@ Evaluating both the Baseline model with metrics like MAE,R2 Score.
 
 Through this Process of Baseline Model we found out that RandomForest is Good Baseline Model.
 
-5)We performed below experiments with help of Dagshub(Github for ML) and MLFlow(Experiment tracking).
+5)We performed below experiments with help of Dagshub(Github for ML) and MLFlow(Experiment tracking,model registry).
 
 Performed EXP1: Where we will use RandomForest in 2 ways without Missing Values and Imputation of Missing Vals.
 
@@ -33,11 +33,19 @@ Performed Data versioning as well through dvc.
 7)Created data_cleaning.py file in src/data folder which is basically data_clean_utils file code but tracked through dvc
 Defined dvc.yaml and params.yaml file.
 In dvc .yaml file added the required code for each section.
+Also in params.yaml file added required hyperparameters during data preparation,training stage
 
 Than run dvc repro to run this particular stage of dvc.yaml defined 
 Then we can check the current stage using dvc dag.
 Than we can push this stage into github
 
 Similarly repeat this step 7 as we keep on adding stage in the dvc.yaml file and .py files in src folder one by one.
+Until model registry stage.
+Now we can run our entire dvc pipeline again when we make changes in our params.yaml file to test results on different params.
+
+8)Added Remote(s3 bucket) on DVC pipeline.Benefit of this approach is using dvc push we can clone our entire project.
+During this process we connected our dvc with s3 bucket using aws cli.
+
+9)Created API after all this steps through Fastapi(scarlette->unicorn server,pydantic->data validation)
 
 

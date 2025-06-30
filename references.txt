@@ -55,3 +55,25 @@ Similarly repeat this step iii),iv),v) as we keep on adding stage in the dvc.yam
 10)The params.yaml file in DVC (Data Version Control) is used to store hyperparameters or configuration values for your machine learning (or data science) pipeline in a clean, versioned, and reusable way.
 
 11)git log --oneline is used to see all the commits in the repro
+
+12)cmd+option+v is used to paste the image in clipboard into .md file and we view it through cmd+shift+v as preview using dendron extension
+
+13)Downloaded AWS CLI in terminal using brew install awscli
+Than created s3 bucket in aws for project 
+Than configured aws in project by using command aws configure in project terminal
+Details required for this were aws secret key,access key,region name.
+This keys are created using iam role and defining a new user for our usecase.
+Note:While creating this user in iam role give s3full access permission.
+
+
+14)To check if any remote is added to dvc we used dvc remote list command
+Than we connected our dvc with remote of aws(i.e s3 bucket) using below command
+dvc remote add -d myremote  s3://swiggy-food-delivery-time-prediction-project-2025-bucket
+
+dvc status is used to check the status of data pipelines.
+
+Than to finally push our all the dvc tracked data files from our project to remote(i.e s3 bucket) 
+We run dvc push and can see the msg n files pushed(n is no of data files being tracked by dvc)
+
+Now when we want to bring our files from remote to our system we just have to write command: dvc pull
+

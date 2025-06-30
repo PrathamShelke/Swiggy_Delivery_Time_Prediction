@@ -6,6 +6,6 @@ scikit-learn
 mlflow==2.9.2
 dagshub
 optuna
-dvc
+dvc[s3]
 lightgbm
 joblib
