@@ -77,3 +77,4 @@ We run dvc push and can see the msg n files pushed(n is no of data files being t
 
 Now when we want to bring our files from remote to our system we just have to write command: dvc pull
 
+15)

@@ -41,11 +41,23 @@ Than we can push this stage into github
 
 Similarly repeat this step 7 as we keep on adding stage in the dvc.yaml file and .py files in src folder one by one.
 Until model registry stage.
+
 Now we can run our entire dvc pipeline again when we make changes in our params.yaml file to test results on different params.
+Will get different versions of model through this process of changing params.
 
 8)Added Remote(s3 bucket) on DVC pipeline.Benefit of this approach is using dvc push we can clone our entire project.
 During this process we connected our dvc with s3 bucket using aws cli.
 
-9)Created API after all this steps through Fastapi(scarlette->unicorn server,pydantic->data validation)
+9)Created API after all this steps through Fastapi(scarlette->unicorn server,pydantic->data validation) for model serving.
+By creating app.py and data_clean_utils.py running it we can call our api and check for model prediction through swagger ui by going to /docs.
+to run this api command is python app.py .
+
+10)To test model for getting sample predictions on our data we can use sample_prediction.py file and in another terminal app.py 
+
+11)We can check for if our model is registered on mlflow using test_model_registry.py file
+by running command: python -m pytest tests/test_model_registry.py 
+Also to check model performance we can run python -m pytest tests/test_model_perf.py 
+
+12)After our final model is confirmed than we can move model into Production stage from Staging stage using promote_model_to_prod.py file.
 
 
