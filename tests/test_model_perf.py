@@ -31,7 +31,7 @@ stage = "Staging"
 # load the model
 model_path = f"models:/{model_name}/{stage}"
 
-# load the latest model from model registry
+# load the latest model from model registry in staging stage
 model = mlflow.sklearn.load_model(model_path)
 
 # set the root path
