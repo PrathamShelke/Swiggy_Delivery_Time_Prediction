@@ -84,5 +84,78 @@ git add .
 git commit -m "commit message"
 git push -u origin main
 
+If everything goes well and all tests are automated than we can see our model going into production stage on mlflow.
+
+We can see entire working of ci pipeline after running git push command by going to github and in actions tab
+
+13)Now we created a dockerfile named Dockerfile for containerising our entire app 
+Dockerfile is nothing but the set of instructions to be performed to create docker image
+We created requirements-dockers.txt for installing dependencies
+
+To do this we first have to install docker desktop
+Than to create a docker image we need to run cmd: docker build -t nameofcontainer:latest .
+
+To check if images are created or not use cmd: docker image ls
+
+Now after building if we want to run this docker container we have to use cmd:
+ docker run --name enteranyname -p 8000:8000 -e DAGSHUB_USER_TOKEN=entertoken dockerimagename
+
+ After running this command we can see our app is running by visiting the port mentioned http://0.0.0.0:8000/docs 
+ So our app is now running perfectly in our localhost through docker container
+
+
+ We can test it to see our model predictions by using this below dummy json data in required format
+ {
+  "ID": "0x4607",
+  "Delivery_person_ID": "INDORES13DEL02",
+  "Delivery_person_Age": "37",
+  "Delivery_person_Ratings": "4.9",
+  "Restaurant_latitude": 22.745049,
+  "Restaurant_longitude": 75.892471,
+  "Delivery_location_latitude": 22.765049,
+  "Delivery_location_longitude": 75.912471,
+  "Order_Date": "19-03-2022",
+  "Time_Orderd": "11:30:00",
+  "Time_Order_picked": "11:45:00",
+  "Weatherconditions": "conditions Sunny",
+  "Road_traffic_density": "High",
+  "Vehicle_condition": 2,
+  "Type_of_order": "Snack",
+  "Type_of_vehicle": "motorcycle",
+  "multiple_deliveries": "0",
+  "Festival": "No",
+  "City": "Urban"
+}
+
+14)Now we will run this image on AWS ECR(Elastic Container registry) instead of docker hub 
+AWS ECR is used to store, manage, and deploy Docker container images.
+
+To create a private repo in AWS ECR we need to search AWS ECR in aws console and create a repo with default settings
+
+Than we will add secrets in github actions of aws ecr uri 
+for eg:ECR_REPOSITORY_URI=enterreponameofecr
+
+To push our image into AWS ECR follow below push commands steps
+i)Retrieve an authentication token and authenticate your Docker client to your registry. Use the AWS CLI:
+
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 133615152110.dkr.ecr.ap-south-1.amazonaws.com
+Note: If you receive an error using the AWS CLI, make sure that you have the latest version of the AWS CLI and Docker installed.
+
+ii)Build your Docker image using the following command. For information on building a Docker file from scratch see the instructions here . You can skip this step if your image is already built:
+
+docker build -t food_delivery_time_prediction .
+
+iii)After the build completes, tag your image so you can push the image to this repository:
+
+docker tag food_delivery_time_prediction:latest 133615152110.dkr.ecr.ap-south-1.amazonaws.com/food_delivery_time_prediction:latest
+
+iv)Run the following command to push this image to your newly created AWS repository:
+
+docker push 133615152110.dkr.ecr.ap-south-1.amazonaws.com/food_delivery_time_prediction:latest
+
+
+
+
+
 
 
