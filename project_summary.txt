@@ -135,6 +135,11 @@ To create a private repo in AWS ECR we need to search AWS ECR in aws console and
 Than we will add secrets in github actions of aws ecr uri 
 for eg:ECR_REPOSITORY_URI=enterreponameofecr
 
+Also give amazon ecr full access to user by adding permissions in user 
+eg:AmazonEC2ContainerRegistryFullAccess
+
+Than push the code on github to see entire cicd pipeline running again upto aws ecr container registry.
+
 To push our image into AWS ECR follow below push commands steps
 i)Retrieve an authentication token and authenticate your Docker client to your registry. Use the AWS CLI:
 
