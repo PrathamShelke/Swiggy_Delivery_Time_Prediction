@@ -213,7 +213,48 @@ vii)Now will make any small change in params.yaml and run dvc pipeline again usi
 Also will write dvc push in terminal so that we get latest model in our s3 bucket.
 
 than give awscodedeploy full access to the project user under i am role 
-Than push all changes to github ,Once code is pushed we can see in github actions cicd pipeline running again.
+Than push all changes to github ,Once code is pushed we can see in github actions our entire cicd pipeline running.
+
+viii)Now once entire cicd pipeline is completed we can go to aws codeDeploy under deployments and wait until deployment is complete
+Than after deployment is completed go to public ip address in ec2 instance which is running and we can use our fastapi app now
+Check whether app is giving proper results by checking /predict
+
+
+16)Incase we want to push our app into ec2 manually instead of this entire cicd pipeline
+i)First check if docker image of our app is created locally using docker image ls
+ii)If its created which will be as per our project we have already created it .
+give it a tag using cmd:docker tag swiggy_food_delivery_prediction1 aiwizards29/swiggy_food_delivery_prediction1:latest
+
+iii)than use cmd: docker login and enter username of docker,imagename or else one time login 
+
+iv)than use cmd:docker push aiwizards29/swiggy_food_delivery_prediction1:latest
+to push docker image from local to docker hub oneline
+
+v)than login into ec2 instance using  ssh -i ~/Downloads/test_delivery_time_pred.pem ubuntu@enterec2publicipv4address
+
+vi)than use cmd :docker pull aiwizards29/swiggy_food_delivery_prediction1:latest to pull the image from docker hub
+
+if giving error to pull its most likely because ec2 instance is build on different archtecture than mac os m4 chip
+to push the image which is compatible with ec2 instance 
+follow below steps
+✅ 1. Enable experimental features (if needed)
+In ~/.docker/config.json, add this:
+{
+  "experimental": "enabled"
+}
+✅ 2. Rebuild the image for linux/amd64
+
+docker buildx create --use
+docker buildx build --platform linux/amd64 -t aiwizards29/swiggy_food_delivery_prediction1:latest . --push
+⚠️ Note: --push is required for buildx — it pushes directly instead of creating a local image.
+
+than run docker pull aiwizards29/swiggy_food_delivery_prediction1:latest to pull the image from docker hub in ec2 instance login
+
+vii)than run docker container using command: docker run -d -p 8000:8000 yourusername/yourapp:latest
+username is docker username,your app is image name 
+
+viii)than to test the app use cmd:http://ipaddress:8000/predict in web search
+
 
 
 
