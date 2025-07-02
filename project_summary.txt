@@ -210,7 +210,10 @@ vi)Than created appspec.yml file and added its relevant .sh file in deploy/scrip
 Than will create a new s3 bucket for deployment purpose 
 
 vii)Now will make any small change in params.yaml and run dvc pipeline again using dvc repro
-Than push all changes to github 
+Than push all changes to github ,Once code is pushed we can see in github actions cicd pipeline running again
+Also will write dvc push in terminal so that we get latest model in our s3 bucket.
+
+
 
 
 
