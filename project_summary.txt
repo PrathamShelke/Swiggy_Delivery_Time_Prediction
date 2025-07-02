@@ -139,24 +139,86 @@ Also give amazon ecr full access to user by adding permissions in user
 eg:AmazonEC2ContainerRegistryFullAccess
 
 Than push the code on github to see entire cicd pipeline running again upto aws ecr container registry.
+We can see in github actions how our cicd pipeline is running.
+After pipeline execution is completed check in amazon ecr if image is created 
 
-To push our image into AWS ECR follow below push commands steps
-i)Retrieve an authentication token and authenticate your Docker client to your registry. Use the AWS CLI:
+15)Now to deploy our app on AWS will use AWS CodeDeploy 
+To deploy it will follow below steps
+i)Creating new iam role and selecting ec2 instance inside roles and attaching permission policies
+AmazonEC2ContainerRegistryreadonly,Amazons3readonly,amazonec2forcodedeploy
 
-aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 133615152110.dkr.ecr.ap-south-1.amazonaws.com
-Note: If you receive an error using the AWS CLI, make sure that you have the latest version of the AWS CLI and Docker installed.
+Creating another i am role and selecting codeDeploy and for autoscaling 
 
-ii)Build your Docker image using the following command. For information on building a Docker file from scratch see the instructions here . You can skip this step if your image is already built:
+ii)Now will go in ec2 instances and create new template give any name to instance and select guidance required
+Than select os as ubuntu,instance as t2 micro as its free,generate new key pair,select the network vpc,
+Go in advnaced details and under iam instance profile name select role of launchtemp created
+Than scroll down and in the empty box section in last put below command as it is
 
-docker build -t food_delivery_time_prediction .
+#!/bin/bash
 
-iii)After the build completes, tag your image so you can push the image to this repository:
+# update packages
+sudo apt update -y
 
-docker tag food_delivery_time_prediction:latest 133615152110.dkr.ecr.ap-south-1.amazonaws.com/food_delivery_time_prediction:latest
+# install ruby required for code deploy
+sudo apt install ruby-full -y
 
-iv)Run the following command to push this image to your newly created AWS repository:
+# get additional packages
+sudo apt install wget -y
+cd /home/ubuntu
 
-docker push 133615152110.dkr.ecr.ap-south-1.amazonaws.com/food_delivery_time_prediction:latest
+# import the agent
+wget https://aws-codedeploy-ap-south-1.s3.ap-south-1.amazonaws.com/latest/install
+
+# install the agent
+chmod +x ./install
+sudo ./install auto
+
+# run the agent
+sudo systemctl start codedeploy-agent
+
+Than click on create launch template and will see its created now in same page will see 
+
+iii)Create autoscaling group will click on it 
+now will give name to aur asg 
+than in availability zones will select ap south1a,south1b
+than select attach new load balancer,select application load balancer and internet facing
+than will give name to load balancer,add target group name
+than will turn on health check and give 300 seconds time
+than will give desired capacity as 2
+min and max capacity as 1 and 2 respectively
+and select target tracking scaling policy
+rest things defualt on page and enable monitoring in addtional settings section
+will skip notification and tags section
+than after reviewing entire auto scaling group will click on create auto scaling group
+
+iv)Now will connect with our ec2 instance by entering below to commands in our terminal
+chmod 400 ~/Downloads/test_delivery_time_pred.pem
+ ssh -i ~/Downloads/test_delivery_time_pred.pem ubuntu@enterec2publicipv4address
+
+than enter cmd to run codeDeploy agent : sudo systemctl status codedeploy-agent
+We can see the agent is in active state of running 
+
+v)Now will go on Aws and type codedeploy and click on create application
+Than will enter name of our app and select ec2 under compute platform.
+
+Now will click on create deployment group:give name,select service role,deployment type(inplace)
+than in environment select ec2 auto scaling group and in deployment configuration select one at a time
+and in load balancer select application load balancer 
+Now click on create deployment group
+
+vi)Than created appspec.yml file and added its relevant .sh file in deploy/scripts folder by adding relevant things required in it.
+Than will create a new s3 bucket for deployment purpose 
+
+vii)Now will make any small change in params.yaml and run dvc pipeline again using dvc repro
+Than push all changes to github 
+
+
+
+
+
+
+
+
 
 
 
